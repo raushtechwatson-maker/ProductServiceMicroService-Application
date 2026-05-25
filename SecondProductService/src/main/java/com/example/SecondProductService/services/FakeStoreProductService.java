@@ -1,6 +1,7 @@
 package com.example.SecondProductService.services;
 
 import com.example.SecondProductService.dtos.FakeStoreProductDto;
+import com.example.SecondProductService.exceptions.ProductNotFoundException;
 import com.example.SecondProductService.models.Category;
 import com.example.SecondProductService.models.Product;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +22,25 @@ public class FakeStoreProductService implements ProductService {
             this.restTemplate = restTemplate;
         }
 
+
     @Override
     public Product getSingleProduct(Long productId) {
+           throw new RuntimeException("Something went wrong");
 
-        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity=restTemplate.
-                getForEntity("https://fakestoreapi.com/products/"
-                + productId, FakeStoreProductDto.class);
-
-        FakeStoreProductDto fakeStoreProductDto=fakeStoreProductDtoResponseEntity.getBody();
-
-        //convert fakeStoreProductDto into product object and return it
-        Product product = convertFakeStoreProductDtoIntoProduct(fakeStoreProductDto);
-        return product;
+//        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity=restTemplate.
+//                getForEntity("https://fakestoreapi.com/products/"
+//                + productId, FakeStoreProductDto.class);
+//
+//        FakeStoreProductDto fakeStoreProductDto=fakeStoreProductDtoResponseEntity.getBody();
+//
+//        if (fakeStoreProductDto==null){
+//            throw new ProductNotFoundException("Products with id" +productId +"doesn't exist" );
+//        }
+//
+//
+//        //convert fakeStoreProductDto into product object and return it
+//        Product product = convertFakeStoreProductDtoIntoProduct(fakeStoreProductDto);
+//        return product;
     }
 
     @Override

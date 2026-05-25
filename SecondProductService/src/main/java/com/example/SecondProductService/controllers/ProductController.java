@@ -1,7 +1,10 @@
 package com.example.SecondProductService.controllers;
 
+import com.example.SecondProductService.dtos.ExceptionDto;
+import com.example.SecondProductService.dtos.ProductNotFoundExceptionDto;
 import com.example.SecondProductService.models.Product;
 import com.example.SecondProductService.services.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +22,26 @@ public class ProductController {
 
     //localhost:8080:/products/10
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId) {
-         Long id=productId;
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) {
+
+        //ResponseEntity<Product> responseEntity = null;
+
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(
+                 productService.getSingleProduct(productId)
+                , HttpStatus.OK
+        );
+
+         //throw new RuntimeException("Something went wrong");
         //should we call fakeStore api here  ,We should make a call to the service
-        return productService.getSingleProduct(productId);
+//        try {
+//            Product product = productService.getSingleProduct(productId);
+//            responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+//        } catch (Exception e) {
+//            //log the exception
+//            e.printStackTrace();
+//            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+        return responseEntity;
     }
 
 
@@ -47,4 +66,14 @@ public class ProductController {
 
 
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ExceptionDto> handleRunTimeException() {
+        ExceptionDto exceptionDto = new ExceptionDto();
+        exceptionDto.setMessage("Handling exception within the controller");
+
+        return new ResponseEntity<>(
+                exceptionDto,
+                HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
 }
