@@ -2,6 +2,7 @@ package com.example.SecondProductService.controllers;
 
 import com.example.SecondProductService.dtos.ExceptionDto;
 import com.example.SecondProductService.dtos.ProductNotFoundExceptionDto;
+import com.example.SecondProductService.exceptions.CategoryNotFoundException;
 import com.example.SecondProductService.models.Product;
 import com.example.SecondProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,8 +54,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return new Product();
+    public Product createProduct(@RequestBody Product product) throws CategoryNotFoundException {
+        return productService.createProduct(product);
     }
 
     @DeleteMapping("/{id}")
@@ -65,13 +66,13 @@ public class ProductController {
     //updateProduct() --> patch
     //replaceProduct() --> put
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ExceptionDto> handleRunTimeException() {
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage("Handling exception within the controller");
-
-        return new ResponseEntity<>(
-                exceptionDto,
-                HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<ExceptionDto> handleRunTimeException() {
+//        ExceptionDto exceptionDto = new ExceptionDto();
+//        exceptionDto.setMessage("Handling exception within the controller");
+//
+//        return new ResponseEntity<>(
+//                exceptionDto,
+//                HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

@@ -1,20 +1,21 @@
 package com.example.SecondProductService.exceptions;
 
-public class ProductNotFoundException extends RuntimeException {
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class ProductNotFoundException extends RuntimeException {
+    private Long productId;
     public ProductNotFoundException(String message) {
         super(message);
     }
 
 
-    private Long productId;
-
-    public ProductNotFoundException(Long productId) {
+    public ProductNotFoundException(    String message, Long productId) {
+        super(message);
         this.productId = productId;
-    }
-
-    public Long getProductId() {
-        return productId;
     }
 
 }

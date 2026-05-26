@@ -15,6 +15,7 @@ public class ProductserviceExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionDto> handleRuntimeExecption(){
 
+
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("An error occurred while processing your request.");
         exceptionDto.setResolutionDetails("You have to pay the money for this month to use this service !  Thanks....");
@@ -29,11 +30,11 @@ public class ProductserviceExceptionHandler {
 
     //2.
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ProductNotFoundExceptionDto>  handleProductNotFoundException(){
+    public ResponseEntity<ProductNotFoundExceptionDto>  handleProductNotFoundException(ProductNotFoundException exception){
         ProductNotFoundExceptionDto exceptionDto = new ProductNotFoundExceptionDto();
         exceptionDto.setMessage("Product not found.");
         exceptionDto.setResolution("Please try again with valid product id");
-        exceptionDto.setProductId(0L);
+        exceptionDto.setProductId(exception.getProductId());
 
         return new  ResponseEntity<>(
                 //"Please try again later.",

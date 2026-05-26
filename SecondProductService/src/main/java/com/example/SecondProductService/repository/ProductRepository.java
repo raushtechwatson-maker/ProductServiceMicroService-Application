@@ -12,12 +12,19 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
     //Select * from Product where id = ?
-    @Override
+
     Optional<Product> findById(Long productId);
 
 
-    @Override
+
     List<Product> findAll();
+
+
+    //insert + update ==> called as Upsert operation
+    Product save(Product product);
+
+
+
 
 
 //    Optional<List<Product>> findByTitleContainsIgnoreCase(String title);

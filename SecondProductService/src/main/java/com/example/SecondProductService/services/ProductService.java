@@ -1,5 +1,6 @@
 package com.example.SecondProductService.services;
 
+import com.example.SecondProductService.exceptions.CategoryNotFoundException;
 import com.example.SecondProductService.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product createProduct( Product product);
+    Product createProduct( Product product) throws CategoryNotFoundException;
 
      boolean deleteProduct(Long productId);
 
