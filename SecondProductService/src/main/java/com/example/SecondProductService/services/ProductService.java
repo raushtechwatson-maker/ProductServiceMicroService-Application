@@ -16,7 +16,7 @@ public interface ProductService {
 
     Product createProduct( Product product) throws CategoryNotFoundException;
 
-     boolean deleteProduct(Long productId);
+     void deleteProduct(Long productId);
 
 //     default void fun(){
 //         System.out.println("fun");

@@ -23,11 +23,11 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     //insert + update ==> called as Upsert operation
     Product save(Product product);
 
+    @Override
+    void deleteById(Long productId);
 
 
-
-
-//    Optional<List<Product>> findByTitleContainsIgnoreCase(String title);
+    //    Optional<List<Product>> findByTitleContainsIgnoreCase(String title);
 
 
     //            productRepository.save(product);        // insert/update

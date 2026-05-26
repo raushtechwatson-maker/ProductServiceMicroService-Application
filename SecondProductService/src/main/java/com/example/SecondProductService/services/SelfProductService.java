@@ -64,7 +64,7 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public boolean deleteProduct(Long productId) {
-        return false;
+    public void deleteProduct(Long productId) {
+        productRepository.deleteById(productId);
     }
 }
