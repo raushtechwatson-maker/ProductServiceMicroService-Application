@@ -33,7 +33,7 @@ public class ProductserviceExceptionHandler {
         ProductNotFoundExceptionDto exceptionDto = new ProductNotFoundExceptionDto();
         exceptionDto.setMessage("Product not found.");
         exceptionDto.setResolution("Please try again with valid product id");
-        //exceptionDto.setProductId(0L);
+        exceptionDto.setProductId(0L);
 
         return new  ResponseEntity<>(
                 //"Please try again later.",
